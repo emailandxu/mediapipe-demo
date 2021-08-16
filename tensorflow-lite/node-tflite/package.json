@@ -1,0 +1,32 @@
+{
+  "name": "node-tflite",
+  "version": "0.0.2",
+  "description": "TensorFlow Lite bindings for Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "dist": "tsc index.ts --target es5 --module commonjs --strict --declaration"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seanchas116/node-tflite.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/seanchas116/node-tflite/issues"
+  },
+  "homepage": "https://github.com/seanchas116/node-tflite#readme",
+  "dependencies": {
+    "bindings": "^1.5.0",
+    "node-addon-api": "^3.0.0"
+  },
+  "gypfile": true,
+  "devDependencies": {
+    "@types/jest": "^25.2.2",
+    "canvas": "^2.6.1",
+    "jest": "^26.0.1",
+    "ts-jest": "^26.0.0",
+    "typescript": "^3.9.2"
+  }
+}

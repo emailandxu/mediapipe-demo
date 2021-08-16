@@ -1,0 +1,19 @@
+{
+  "name": "electron-mediapipe-face",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "tsc && electron ."
+  },
+  "author": "",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "node-tflite": "file:../../node-tflite"
+  },
+  "devDependencies": {
+    "electron": "^9.4.0",
+    "typescript": "^3.9.2"
+  }
+}
