@@ -43,7 +43,7 @@ class TFLiteModel {
         this.interpreter.allocateTensors();
 
         this.interpreter.allocateTensors();
-        console.log(this.interpreter.inputs[0].dims)
+        console.log(model_path + ": "+this.interpreter.inputs[0].dims)
 
     }
 
@@ -67,9 +67,9 @@ class TFLiteModel {
         // console.log(inputSize, interpreter.inputs[0].dims, rgbFloat);
         this.interpreter.inputs[0].copyFrom(rgbFloat);
 
-        // console.log("before interpreter invoke" + Date.now() + Date());
+        console.log("before interpreter invoke" + Date.now() + Date());
         this.interpreter.invoke();
-        // console.log("after interpreter invoke" + Date.now() + Date());
+        console.log("after interpreter invoke" + Date.now() + Date());
 
         return this.interpreter.outputs;
     }
@@ -175,7 +175,7 @@ async function init() {
     video.play();
 
     const faceDetector = new FaceDetector("face_detection_front.tflite");
-    const masker = new PortraitMasker("selfie_segmentation.tflite");
+    const masker = new PortraitMasker("mlkit.tflite");
 
     const canvas = document.getElementById("canvas") as HTMLCanvasElement;
     canvas.width = 256;
@@ -203,7 +203,7 @@ async function init() {
 
             for (var i = 0; i < colorMap.length; i += 4) {
                 var blinkThrehold = 0.1;
-                let isHumanThrehold = 0.9;
+                let isHumanThrehold = 0.5;
                 var sideSimilar = Math.abs(pre_mask[i / 4] - next_mask[i / 4]) <= blinkThrehold;
                 var midUnsimilar = Math.abs(mask[i / 4] - pre_mask[i / 4]) > blinkThrehold && Math.abs(mask[i / 4] - next_mask[i / 4]) > blinkThrehold;
                 var isHuman = 1;

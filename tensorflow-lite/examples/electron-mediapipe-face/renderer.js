@@ -80,7 +80,7 @@ var TFLiteModel = /** @class */ (function () {
         this.interpreter = new node_tflite_1.Interpreter(fs_1.default.readFileSync(modelPath));
         this.interpreter.allocateTensors();
         this.interpreter.allocateTensors();
-        console.log(this.interpreter.inputs[0].dims);
+        console.log(model_path + ": " + this.interpreter.inputs[0].dims);
     }
     TFLiteModel.prototype.forward = function (input, inputSize) {
         if (inputSize === void 0) { inputSize = undefined; }
@@ -98,9 +98,9 @@ var TFLiteModel = /** @class */ (function () {
         // console.log("after draw image" + Date.now() + Date());
         // console.log(inputSize, interpreter.inputs[0].dims, rgbFloat);
         this.interpreter.inputs[0].copyFrom(rgbFloat);
-        // console.log("before interpreter invoke" + Date.now() + Date());
+        console.log("before interpreter invoke" + Date.now() + Date());
         this.interpreter.invoke();
-        // console.log("after interpreter invoke" + Date.now() + Date());
+        console.log("after interpreter invoke" + Date.now() + Date());
         return this.interpreter.outputs;
     };
     return TFLiteModel;
@@ -202,7 +202,7 @@ function init() {
                     video.srcObject = stream;
                     video.play();
                     faceDetector = new FaceDetector("face_detection_front.tflite");
-                    masker = new PortraitMasker("selfie_segmentation.tflite");
+                    masker = new PortraitMasker("mlkit.tflite");
                     canvas = document.getElementById("canvas");
                     canvas.width = 256;
                     canvas.height = 256;
@@ -218,7 +218,7 @@ function init() {
                             var colorMap = context.getImageData(0, 0, canvas.width, canvas.height).data;
                             for (var i = 0; i < colorMap.length; i += 4) {
                                 var blinkThrehold = 0.1;
-                                var isHumanThrehold = 0.9;
+                                var isHumanThrehold = 0.5;
                                 var sideSimilar = Math.abs(pre_mask[i / 4] - next_mask[i / 4]) <= blinkThrehold;
                                 var midUnsimilar = Math.abs(mask[i / 4] - pre_mask[i / 4]) > blinkThrehold && Math.abs(mask[i / 4] - next_mask[i / 4]) > blinkThrehold;
                                 var isHuman = 1;
