@@ -15,5 +15,5 @@ git clone -b 0.8.2 https://github.com/google/mediapipe.git
 cp changeFiles/* tensorflow/tensorflow/lite/kernels
 
 cd tensorflow && \
-bazel build -c opt --define tflite_with_xnnpack=true //tensorflow/lite/c:libtensorflowlite_c.so && \
-cp bazel-bin/tensorflow/lite/c/libtensorflowlite_c.so ../
+bazel build -c opt --macos_minimum_os=10.13 --action_env MACOSX_DEPLOYMENT_TARGET=10.13 --define tflite_with_xnnpack=true //tensorflow/lite/c:libtensorflowlite_c.dylib && \
+cp bazel-bin/tensorflow/lite/c/libtensorflowlite_c.dylib ../
